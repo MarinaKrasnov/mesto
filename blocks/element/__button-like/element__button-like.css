@@ -1,0 +1,14 @@
+.element__button-like {
+    background-image: url(../../../images/Group-1.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: #fff;
+    height: 19px;
+    width: 22px;
+    flex-shrink: 2;
+}
+
+.element__button-like:hover {
+    opacity: .5;
+}

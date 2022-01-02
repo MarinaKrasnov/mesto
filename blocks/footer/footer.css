@@ -1,0 +1,17 @@
+.footer {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #545454;
+    margin-top: 67px;
+    grid-area: footer;
+
+}
+
+@media (max-width:837px) {
+    .footer {
+        /*   margin-left: 19px;*/
+        margin-top: 48px;
+    }
+
+}

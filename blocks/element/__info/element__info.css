@@ -1,0 +1,16 @@
+.element__info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: nowrap;
+    margin-right: 20px;
+}
+
+@media (max-width: 837px) {
+    .element__info {
+        margin-right: 30px;
+    }
+
+}

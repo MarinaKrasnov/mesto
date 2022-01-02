@@ -1,0 +1,16 @@
+.popup__title {
+    font-style: normal;
+    font-weight: 900;
+    color: #000000;
+    font-family: Inter;
+    font-size: 24px;
+    line-height: 29px;
+    margin: 0;
+}
+
+@media (max-width:665px) {
+    .popup__title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+}

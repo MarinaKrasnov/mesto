@@ -1,0 +1,9 @@
+.profile__add-button {
+    border: 1px solid #fff;
+    padding: 14px 64px;
+    background-color: #000;
+}
+
+.profile__add-button:hover {
+    opacity: .8;
+}

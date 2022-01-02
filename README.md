@@ -1,17 +1,27 @@
-# Проект: Место
 
-### Обзор
+# Project: Mesto
 
-* Figma
-* Картинки
+### Overview
 
-**Figma**
+* Description
+* Technologies
+* Brief
+* Demo link
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+**Description**
 
-**Картинки**
+It is an example of profile page with following technologies.
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
+**Technologies**
 
-Удачи!
+* HTML5
+* CSS3
+* BEM Methodology
+* Flexbox
+* Grid
+* JS
+
+**Project Brief** 
+
+This project was made according to layout in [Brief](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+

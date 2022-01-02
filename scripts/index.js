@@ -40,11 +40,12 @@ for (var i = 0; i < ElementInfo.length; i++) {
 const SubmitButton = document.querySelector('.popup__submit');
 const Title = document.querySelector('.profile__title');
 const Subtitle = document.querySelector('.profile__subtitle');
-const PopupField1 = document.querySelector('.popup__field1');
-const PopupField2 = document.querySelector('.popup__field2');
+const Popuptitle = document.querySelector('.popup__title');
+const Popupsubtitle = document.querySelector('.popup__subtitle');
 
-SubmitButton.addEventListener('click', function () {
-    Title.textContent = PopupField1.value;
-    Subtitle.textContent = PopupField2.value;
+SubmitButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    Title.textContent = Popuptitle.value;
+    Subtitle.textContent = Popupsubtitle.value;
     closePopup();
 })

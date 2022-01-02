@@ -5,7 +5,6 @@
     color: #545454;
     margin-top: 67px;
     grid-area: footer;
-
 }
 
 @media (max-width:837px) {
@@ -13,5 +12,4 @@
         /*   margin-left: 19px;*/
         margin-top: 48px;
     }
-
 }

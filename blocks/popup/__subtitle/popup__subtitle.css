@@ -4,12 +4,9 @@
     line-height: 17px;
     box-sizing: border-box;
     background-color: transparent;
-    font-family: Inter;
     font-style: normal;
     border: 0;
     width: 100%;
-    box-sizing: border-box;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
-    background-color: transparent;
     height: 48px;
 }

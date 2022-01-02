@@ -1,5 +1,4 @@
 .popup__submit {
-    font-family: Inter;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -10,7 +9,6 @@
     color: #fff;
     background: #000000;
     border-radius: 2px;
-    font-family: inherit;
 }
 
 .popup__submit:hover {

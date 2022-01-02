@@ -43,9 +43,18 @@ const Subtitle = document.querySelector('.profile__subtitle');
 const Popuptitle = document.querySelector('.popup__title');
 const Popupsubtitle = document.querySelector('.popup__subtitle');
 
-SubmitButton.addEventListener('click', function (event) {
+function Submit(event) {
     event.preventDefault();
     Title.textContent = Popuptitle.value;
     Subtitle.textContent = Popupsubtitle.value;
     closePopup();
+}
+SubmitButton.addEventListener('click', function (event) {
+    Submit(event);
 })
+
+document.addEventListener('keydown', function (event) {
+    if (event.code === 'Enter') {
+        Submit(event);
+    }
+});

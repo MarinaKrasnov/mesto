@@ -13,6 +13,7 @@
     margin: 0;
     font-size: 18px;
     line-height: 22px;
+    margin-top: 40px;
 }
 
 .popup__submit:hover {
@@ -26,6 +27,5 @@
         line-height: 17px;
         max-width: 238px;
         max-height: 46px;
-        margin-top: 40px;
     }
 }

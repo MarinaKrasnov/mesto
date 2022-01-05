@@ -1,5 +1,5 @@
 .card {
-    max-width: 282px;
+    /*max-width: 282px;*/
     display: flex;
     flex-direction: column;
     background: #FFFFFF;
@@ -11,6 +11,6 @@
 
 @media (max-width:837px) {
     .card {
-        width: calc(100vw-38px);
+        width: calc(100vw - 38px);
     }
 }

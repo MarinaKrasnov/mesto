@@ -10,7 +10,7 @@
 
 **Description**
 
-It is an example of profile page with following technologies.
+Training to build responsive mobile adaptive project. The project is an example of profile page building with following technologies.
 
 **Technologies**
 
@@ -25,4 +25,4 @@ It is an example of profile page with following technologies.
 
 This project was made according to layout in [Brief](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
-** [Demo Link](https://marinakrasnov.github.io/mesto/)
+** [Demo Link](https://marinakrasnov.github.io/mesto/)**

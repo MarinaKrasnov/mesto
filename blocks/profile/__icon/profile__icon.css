@@ -3,10 +3,17 @@
     padding: 7px;
     margin-left: 18px;
     margin-bottom: 8px;
+    width: 10px;
+    height: 10px;
 }
 
 @media (max-width:837px) {
     .profile__icon {
-        margin-bottom: -8px;
+        padding: 5.25px;
+        width: 7.5px;
+        height: 7.5px;
+        position: absolute;
+        bottom: 10%;
+        right: -28px;
     }
 }

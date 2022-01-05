@@ -1,60 +1,53 @@
-/* Popup opens and closes */
-const EditIcon = document.querySelector('.profile__icon');
-const CloseBtn = document.querySelector('.popup__close-btn');
-const Overlay = document.querySelector('.overlay');
-const OverlayActiveClass = 'overlay_active';
-EditIcon.addEventListener('click', function (event) {
-    event.preventDefault();
-    openPopup();
-});
+/* Variables */
+const editIcon = document.querySelector('.profile__icon');
+const closeBtn = document.querySelector('.popup__close-btn');
+const overlay = document.querySelector('.overlay');
+const overlayActiveClass = 'overlay_active';
+const title = document.querySelector('.profile__title');
+const subtitle = document.querySelector('.profile__subtitle');
+const popupTitle = document.querySelector('.popup__input_value_name');
+const popupSubtitle = document.querySelector('.popup__input_value_profession');
+const submitButton = document.querySelector('.popup__submit');
+const form = document.querySelector('.popup');
 
+/*Functions*/
 function openPopup() {
-    Overlay.classList.add(OverlayActiveClass);
+    overlay.classList.add(overlayActiveClass);
+    popupTitle.value = title.textContent;
+    popupSubtitle.value = subtitle.textContent;
 }
 
 function closePopup() {
-    Overlay.classList.remove(OverlayActiveClass);
+    overlay.classList.remove(overlayActiveClass);
 };
 
-CloseBtn.addEventListener('click', function () {
-    closePopup();
-});
-
-document.addEventListener('keydown', function (event) {
-    if (event.code === 'Escape') {
-        closePopup();
-    }
-});
-
-/*Button "Like" changes after click*/
-let ElementInfo = document.querySelectorAll('.element__info');
-
-for (var i = 0; i < ElementInfo.length; i++) {
-    let ButtonLike = ElementInfo[i].querySelector('.element__button-like');
-    ButtonLike.addEventListener('click', function () {
-        ButtonLike.classList.toggle('element__button-like_active');
-    });
-};
-
-/*Button "Submit"*/
-const SubmitButton = document.querySelector('.popup__submit');
-const Title = document.querySelector('.profile__title');
-const Subtitle = document.querySelector('.profile__subtitle');
-const Popuptitle = document.querySelector('.popup__title');
-const Popupsubtitle = document.querySelector('.popup__subtitle');
-
-function Submit(event) {
-    event.preventDefault();
-    Title.textContent = Popuptitle.value;
-    Subtitle.textContent = Popupsubtitle.value;
+function submit() {
+    title.textContent = popupTitle.value;
+    subtitle.textContent = popupSubtitle.value;
     closePopup();
 }
-SubmitButton.addEventListener('click', function (event) {
-    Submit(event);
-})
 
-document.addEventListener('keydown', function (event) {
-    if (event.code === 'Enter') {
-        Submit(event);
+/* Event Handlers */
+editIcon.addEventListener('click', openPopup);
+
+closeBtn.addEventListener('click', closePopup);
+document.addEventListener('keydown', function (e) {
+    if (e.code === 'Escape') {
+        closePopup();
+    }
+    if (e.code === 'Enter') {
+        submit();
     }
 });
+
+submitButton.addEventListener('click', submit);
+form.addEventListener('submit', submit);
+/*Button "Like" changes after click
+let CardInfo = document.querySelectorAll('.card__info');
+for (var i = 0; i < CardInfo.length; i++) {
+    let ButtonLike = CardInfo[i].querySelector('.card__button-like');
+    ButtonLike.addEventListener('click', function () {
+        ButtonLike.classList.toggle('card__button-like_active');
+    });
+};
+*/

@@ -8,20 +8,21 @@ const subtitle = document.querySelector('.profile__subtitle');
 const popupTitle = document.querySelector('.popup__input_value_name');
 const popupSubtitle = document.querySelector('.popup__input_value_profession');
 const submitButton = document.querySelector('.popup__submit');
-const form = document.querySelector('.popup');
+const form = document.querySelector('form');
 
 /*Functions*/
 function openPopup() {
-    overlay.classList.add(overlayActiveClass);
     popupTitle.value = title.textContent;
     popupSubtitle.value = subtitle.textContent;
+    overlay.classList.add(overlayActiveClass);
 }
 
 function closePopup() {
     overlay.classList.remove(overlayActiveClass);
 };
 
-function submit() {
+function submit(event) {
+    event.preventDefault();
     title.textContent = popupTitle.value;
     subtitle.textContent = popupSubtitle.value;
     closePopup();
@@ -35,13 +36,13 @@ document.addEventListener('keydown', function (e) {
     if (e.code === 'Escape') {
         closePopup();
     }
-    if (e.code === 'Enter') {
-        submit();
-    }
+    /* if (e.code === 'Enter') {
+         submit();
+     }*/
 });
 
-submitButton.addEventListener('click', submit);
 form.addEventListener('submit', submit);
+/*submitButton.addEventListener('click', submit);*/
 /*Button "Like" changes after click
 let CardInfo = document.querySelectorAll('.card__info');
 for (var i = 0; i < CardInfo.length; i++) {

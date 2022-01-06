@@ -7,10 +7,3 @@
     flex-wrap: nowrap;
     margin-right: 20px;
 }
-
-@media (max-width: 837px) {
-    .card__info {
-        margin-right: 20px;
-    }
-
-}

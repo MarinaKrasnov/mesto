@@ -23,6 +23,6 @@ Training to build responsive mobile adaptive project. The project is an example 
 
 **Project Brief** 
 
-This project was made according to layout in [Brief](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+This project was made according to layout in [Brief](https://https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=50160%3A234)
 
 ** [Demo Link](https://marinakrasnov.github.io/mesto/)**

@@ -1,4 +1,4 @@
-.popup__close-btn {
+.close-btn {
     position: absolute;
     background-image: url(../../../images/Edit\ Button-1.svg);
     top: -40px;
@@ -8,7 +8,7 @@
 }
 
 @media (max-width:665px) {
-    .popup__close-btn {
+    .close-btn {
         width: 20px;
         height: 20px;
         top: -36px;

@@ -1,6 +1,6 @@
 /* Variables */
 const editIcon = document.querySelector('.profile__icon');
-const closeBtn = document.querySelector('.popup__close-btn');
+const closeBtn = document.querySelector('.close-btn');
 const overlay = document.querySelector('.overlay');
 const overlayActiveClass = 'overlay_active';
 const title = document.querySelector('.profile__title');
@@ -63,7 +63,7 @@ const inputLink = document.querySelector('.popup__input_type_link');
 const card = document.querySelector('.card');
 const overlayImageWrapper = document.querySelector('.overlay-image');
 const overlayImage = document.querySelector('.overlay-image__image');
-const closeBtnAdd = overlayAdd.querySelector('.popup__close-btn');
+const closeBtnAdd = overlayAdd.querySelector('.close-btn');
 const renderCard = (item) => {
 
 };
@@ -80,7 +80,7 @@ const handlerAddCard = (e) => {
         overlayImageWrapper.querySelector('.overlay-image__image').src = img;
         const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__capture');
         overlayImageCapture.textContent = cardElement.querySelector('.card__text').textContent;
-        const buttonCloseImage = overlayImageWrapper.querySelector('.overlay-image__close-btn');
+        const buttonCloseImage = overlayImageWrapper.querySelector('.close-btn');
         buttonCloseImage.addEventListener('click', () => closePopup(overlayImageWrapper));
     }
     cardElement.querySelector('.card__image').addEventListener('click', handleImageClick);
@@ -94,7 +94,7 @@ const handlerAddCard = (e) => {
         cardElement.remove();
     });
     //Button to close popup
-    const buttonCloseImage = overlayImageWrapper.querySelector('.popup__close-btn');
+    const buttonCloseImage = overlayImageWrapper.querySelector('.close-btn');
     buttonCloseImage.addEventListener('click', closePopup(overlayImageWrapper));
 
     cards.prepend(cardElement);
@@ -113,7 +113,7 @@ initialCards.forEach(item => {
         const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__capture');
         overlayImageCapture.textContent = cardElement.querySelector('.card__text').textContent;
         //Button to close popup
-        const buttonCloseImage = overlayImageWrapper.querySelector('.overlay-image__close-btn');
+        const buttonCloseImage = overlayImageWrapper.querySelector('.close-btn');
         buttonCloseImage.addEventListener('click', () => closePopup(overlayImageWrapper));
     }
     cardElement.querySelector('.card__image').addEventListener('click', handleImageClick);

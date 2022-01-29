@@ -2,6 +2,12 @@
     object-fit: cover;
     display: block;
     height: 282px;
+    transition: ease-in .3s;
+}
+
+.card__image:hover {
+    padding: 2px;
+    background-color: slategray;
 }
 
 @media (max-width: 837px) {

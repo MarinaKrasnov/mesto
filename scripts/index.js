@@ -37,17 +37,14 @@ const overlayAdd = document.querySelector('.overlay-add');
 const overlayImageWrapper = document.querySelector('.overlay-image');
 const closeBtn = overlayProfile.querySelector('.close-btn');
 const buttonCloseImage = overlayImageWrapper.querySelector('.close-btn');
-
 const closeBtnAdd = overlayAdd.querySelector('.close-btn');
 const addButton = document.querySelector('.profile__add-button');
-
 const cards = document.querySelector('.cards');
 const cardsTemplate = document.querySelector('#card-template').content.querySelector('.card');
 const formAddCards = document.querySelector('[name="new-place"]');
 const inputPlaceName = document.querySelector('.popup__input_type_place-name');
 const inputLink = document.querySelector('.popup__input_type_link');
 const overlayImage = document.querySelector('.overlay-image__image');
-
 
 /*Functions*/
 function openPopup(e) {

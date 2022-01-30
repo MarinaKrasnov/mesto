@@ -35,7 +35,7 @@ const formProfile = document.querySelector('[name="form-profile"]');
 const overlayProfile = document.querySelector('.overlay-profile');
 const overlayAdd = document.querySelector('.overlay-add');
 const overlayImageWrapper = document.querySelector('.overlay-image');
-const closeBtn = overlayProfile.querySelector('.close-btn');
+const closeBtnProfile = overlayProfile.querySelector('.close-btn');
 const buttonCloseImage = overlayImageWrapper.querySelector('.close-btn');
 const closeBtnAdd = overlayAdd.querySelector('.close-btn');
 const addButton = document.querySelector('.profile__add-button');
@@ -75,10 +75,9 @@ function createCard(name, link) {
     //Creating popup for each card
     const handleImageClick = (e) => {
         openPopup(overlayImageWrapper);
-        const img = e.target.src;
-        overlayImage.src = img;
+        overlayImage.src = link;
         const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__capture');
-        overlayImageCapture.textContent = cardElement.querySelector('.card__text').textContent;
+        overlayImageCapture.textContent = name;
     }
     cardElement.querySelector('.card__image').addEventListener('click', handleImageClick);
     //Hanging a button "Like" on a card
@@ -119,6 +118,6 @@ editIcon.addEventListener('click', (e) => {
     popupSubtitle.value = subtitle.textContent;
     openPopup(overlayProfile);
 });
-closeBtn.addEventListener('click', () => closePopup(overlayProfile));
+closeBtnProfile.addEventListener('click', () => closePopup(overlayProfile));
 closeBtnAdd.addEventListener('click', () => closePopup(overlayAdd));
 buttonCloseImage.addEventListener('click', () => closePopup(overlayImageWrapper));

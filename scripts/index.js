@@ -112,12 +112,33 @@ const handlerAddCard = (e) => {
 };
 formProfile.addEventListener('submit', submitProfileForm);
 formAddCards.addEventListener('submit', handlerAddCard);
-addButton.addEventListener('click', () => openPopup(overlayAdd));
+addButton.addEventListener('click', () => {
+    openPopup(overlayAdd)
+    handleField(formAddCards, inputPlaceName, formsValidationConfig);
+    handleField(formAddCards, inputLink, formsValidationConfig);
+});
 editIcon.addEventListener('click', (e) => {
     popupTitle.value = title.textContent;
     popupSubtitle.value = subtitle.textContent;
     openPopup(overlayProfile);
 });
-closeBtnProfile.addEventListener('click', () => closePopup(overlayProfile));
+closeBtnProfile.addEventListener('click', () => {
+    closePopup(overlayProfile);
+});
 closeBtnAdd.addEventListener('click', () => closePopup(overlayAdd));
 buttonCloseImage.addEventListener('click', () => closePopup(overlayImageWrapper));
+
+// Closing popup by clicking outside of the popup
+document.addEventListener('click', (e) => {
+    const hasOverlayActiveClass = [...e.target.classList].includes(overlayActiveClass);
+    if (hasOverlayActiveClass) {
+        e.target.classList.remove(overlayActiveClass);
+    }
+});
+//Closing popup with a help of button 'Escape'
+document.addEventListener('keydown', (e) => {
+    const overlayActive = document.querySelector('.overlay_active');
+    if (e.code === 'Escape') {
+        overlayActive.classList.remove(overlayActiveClass);
+    }
+});

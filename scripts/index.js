@@ -35,6 +35,7 @@ const formProfile = document.querySelector('[name="form-profile"]');
 const overlayProfile = document.querySelector('.overlay-profile');
 const overlayAdd = document.querySelector('.overlay-add');
 const overlayImageWrapper = document.querySelector('.overlay-image');
+const overlayActive = document.querySelector('.overlay_active');
 const closeBtnProfile = overlayProfile.querySelector('.close-btn');
 const buttonCloseImage = overlayImageWrapper.querySelector('.close-btn');
 const closeBtnAdd = overlayAdd.querySelector('.close-btn');
@@ -45,6 +46,7 @@ const formAddCards = document.querySelector('[name="new-place"]');
 const inputPlaceName = document.querySelector('.popup__input_type_place-name');
 const inputLink = document.querySelector('.popup__input_type_link');
 const overlayImage = document.querySelector('.overlay-image__image');
+const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__capture');
 
 /*Functions*/
 function openPopup(e) {
@@ -54,6 +56,20 @@ function openPopup(e) {
 function closePopup(e) {
     e.classList.remove(overlayActiveClass);
 }
+// Closing popup by clicking outside of the popup
+function closeByClickingOutside(event, overlay) {
+    const hasOverlayActiveClass = [...event.target.classList].includes(overlayActiveClass);
+    if (hasOverlayActiveClass) {
+        closePopup(overlay)
+    }
+};
+//Closing popup with a help of button 'Escape'
+function closeByEscape(evt) {
+    if (evt.key === 'Escape') {
+        const overlayActive = document.querySelector('.overlay_active');
+        closePopup(overlayActive);
+    }
+};
 
 function submitProfileForm(event) {
     event.preventDefault();
@@ -76,10 +92,12 @@ function createCard(name, link) {
     const handleImageClick = (e) => {
         openPopup(overlayImageWrapper);
         overlayImage.src = link;
-        const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__capture');
+        overlayImage.alt = `Виды на ${name}`;
         overlayImageCapture.textContent = name;
     }
     cardElement.querySelector('.card__image').addEventListener('click', handleImageClick);
+    //Hanging closing popup by clicking on overlay
+    overlayImageWrapper.addEventListener('click', (ev) => closeByClickingOutside(ev, overlayImageWrapper));
     //Hanging a button "Like" on a card
     const buttonLike = cardElement.querySelector('.card__button-like');
     buttonLike.addEventListener('click', () => {
@@ -94,20 +112,22 @@ function createCard(name, link) {
 };
 // Adding a card from the list
 initialCards.forEach(item => {
-    nameElement = item.name;
-    linkElement = item.link;
+    const nameElement = item.name;
+    const linkElement = item.link;
     const card = createCard(nameElement, linkElement);
     renderCard(card);
 });
+
 // Adding a card from the form
 const handlerAddCard = (e) => {
     e.preventDefault();
-    nameCard = inputPlaceName.value;
-    linkCard = inputLink.value;
+    const nameCard = inputPlaceName.value;
+    const linkCard = inputLink.value;
     const card = createCard(nameCard, linkCard);
     renderCard(card);
-    inputLink.value = "";
     inputPlaceName.value = "";
+    inputLink.value = "";
+    setSubmitButtonState(formAddCards, formsValidationConfig);
     closePopup(overlayAdd);
 };
 formProfile.addEventListener('submit', submitProfileForm);
@@ -128,17 +148,6 @@ closeBtnProfile.addEventListener('click', () => {
 closeBtnAdd.addEventListener('click', () => closePopup(overlayAdd));
 buttonCloseImage.addEventListener('click', () => closePopup(overlayImageWrapper));
 
-// Closing popup by clicking outside of the popup
-document.addEventListener('click', (e) => {
-    const hasOverlayActiveClass = [...e.target.classList].includes(overlayActiveClass);
-    if (hasOverlayActiveClass) {
-        e.target.classList.remove(overlayActiveClass);
-    }
-});
-//Closing popup with a help of button 'Escape'
-document.addEventListener('keydown', (e) => {
-    const overlayActive = document.querySelector('.overlay_active');
-    if (e.code === 'Escape') {
-        overlayActive.classList.remove(overlayActiveClass);
-    }
-});
+overlayProfile.addEventListener('click', (evt) => closeByClickingOutside(evt, overlayProfile));
+overlayAdd.addEventListener('click', (e) => closeByClickingOutside(e, overlayAdd));
+document.addEventListener('keydown', closeByEscape);

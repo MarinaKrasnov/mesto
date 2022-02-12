@@ -25,7 +25,6 @@ function handleSubmit(event) {
 }
 
 function handleField(form, input, config) {
-    console.log(input.validity.valid)
     if (!input.validity.valid) {
         showError(form, input, config)
     } else {

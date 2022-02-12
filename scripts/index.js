@@ -96,8 +96,6 @@ function createCard(name, link) {
         overlayImageCapture.textContent = name;
     }
     cardElement.querySelector('.card__image').addEventListener('click', handleImageClick);
-    //Hanging closing popup by clicking on overlay
-    overlayImageWrapper.addEventListener('click', (ev) => closeByClickingOutside(ev, overlayImageWrapper));
     //Hanging a button "Like" on a card
     const buttonLike = cardElement.querySelector('.card__button-like');
     buttonLike.addEventListener('click', () => {
@@ -150,4 +148,5 @@ buttonCloseImage.addEventListener('click', () => closePopup(overlayImageWrapper)
 
 overlayProfile.addEventListener('click', (evt) => closeByClickingOutside(evt, overlayProfile));
 overlayAdd.addEventListener('click', (e) => closeByClickingOutside(e, overlayAdd));
+overlayImageWrapper.addEventListener('click', (ev) => closeByClickingOutside(ev, overlayImageWrapper));
 document.addEventListener('keydown', closeByEscape);

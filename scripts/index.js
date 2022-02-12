@@ -51,10 +51,12 @@ const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__c
 /*Functions*/
 function openPopup(e) {
     e.classList.add(overlayActiveClass);
+    document.addEventListener('keydown', closeByEscape);
 }
 
 function closePopup(e) {
     e.classList.remove(overlayActiveClass);
+    document.removeEventListener('keydown', closeByEscape);
 }
 // Closing popup by clicking outside of the popup
 function closeByClickingOutside(event, overlay) {
@@ -149,4 +151,3 @@ buttonCloseImage.addEventListener('click', () => closePopup(overlayImageWrapper)
 overlayProfile.addEventListener('click', (evt) => closeByClickingOutside(evt, overlayProfile));
 overlayAdd.addEventListener('click', (e) => closeByClickingOutside(e, overlayAdd));
 overlayImageWrapper.addEventListener('click', (ev) => closeByClickingOutside(ev, overlayImageWrapper));
-document.addEventListener('keydown', closeByEscape);

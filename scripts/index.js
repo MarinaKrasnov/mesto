@@ -94,22 +94,20 @@ function renderCard(data, cardsTemplate) {
 initialCards.forEach(item => {
     const nameElement = item.name;
     const linkElement = item.link;
-    const cardElement = renderCard({
+    addCard(renderCard({
         name: nameElement,
         link: linkElement
-    }, cardsTemplate);
-    addCard(cardElement);
+    }, cardsTemplate));
 });
 // Adding a card from the form
 const handleAddCard = (e) => {
     e.preventDefault();
     const nameCard = inputPlaceName.value;
     const linkCard = inputLink.value;
-    const cardElement = renderCard({
+    addCard(renderCard({
         name: nameCard,
         link: linkCard
-    }, cardsTemplate);
-    addCard(cardElement);
+    }, cardsTemplate));
     inputPlaceName.value = "";
     inputLink.value = "";
     formAddCardsValidation.setSubmitButtonState();

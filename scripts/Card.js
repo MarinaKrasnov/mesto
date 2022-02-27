@@ -10,7 +10,7 @@ export class Card {
         this._link = data.link;
         this._template = cardsTemplate;
     }
-    _handleImageClick = (e) => {
+    _handleImageClick = () => {
         openPopup(overlayImageWrapper);
         overlayImage.src = this._link;
         overlayImage.alt = `Виды на ${this._name}`;
@@ -22,15 +22,18 @@ export class Card {
     _handleButtonBin = () => {
         this._cardElement.remove();
     }
+    _getTemplate() {
+        return this._template.cloneNode(true);
+    }
     // Creating a card
     createCard() {
-        this._cardElement = this._template.cloneNode(true);
+        this._cardElement = this._getTemplate();
+        const cardImage = this._cardElement.querySelector('.card__image');
         this._cardElement.querySelector('.card__text').textContent = this._name;
-        this._cardElement.querySelector('.card__image').alt = `Виды на ${this._name}`;
-        this._cardElement.querySelector('.card__image').src = this._link;
+        cardImage.alt = `Виды на ${this._name}`;
+        cardImage.src = this._link;
         //Creating popup for each card
-
-        this._cardElement.querySelector('.card__image').addEventListener('click', this._handleImageClick);
+        cardImage.addEventListener('click', this._handleImageClick);
         //Hanging a button "Like" on a card
         this._buttonLike = this._cardElement.querySelector('.card__button-like');
         this._buttonLike.addEventListener('click', this._handleButtonLike);

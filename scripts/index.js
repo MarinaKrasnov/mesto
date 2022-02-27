@@ -4,6 +4,7 @@ import {
 import {
     Card
 } from './Card.js';
+/* Variables */
 export const formsValidationConfig = {
     formSelector: '.overlay__form',
     inputSelector: '.popup__input',
@@ -12,49 +13,24 @@ export const formsValidationConfig = {
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
 }
-/* Variables */
-const initialCards = [{
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-]
+import {
+    initialCards
+} from "./initial_cards.js";
 const editIcon = document.querySelector('.profile__icon');
 const overlayActiveClass = 'overlay_active';
 const title = document.querySelector('.profile__title');
 const subtitle = document.querySelector('.profile__subtitle');
 const popupTitle = document.querySelector('.popup__input_value_name');
 const popupSubtitle = document.querySelector('.popup__input_value_profession');
-const submitButton = document.querySelector('.popup__submit');
 const formProfile = document.querySelector('[name="form-profile"]');
 const overlayProfile = document.querySelector('.overlay-profile');
 const overlayAdd = document.querySelector('.overlay-add');
 export const overlayImageWrapper = document.querySelector('.overlay-image');
-const overlayActive = document.querySelector('.overlay_active');
 const closeBtnProfile = overlayProfile.querySelector('.close-btn');
 const buttonCloseImage = overlayImageWrapper.querySelector('.close-btn');
 const closeBtnAdd = overlayAdd.querySelector('.close-btn');
 const addButton = document.querySelector('.profile__add-button');
-export const cards = document.querySelector('.cards');
+const cards = document.querySelector('.cards');
 const cardsTemplate = document.querySelector('#card-template').content.querySelector('.card');
 const formAddCards = document.querySelector('[name="new-place"]');
 const inputPlaceName = document.querySelector('.popup__input_type_place-name');
@@ -63,11 +39,17 @@ export const overlayImage = document.querySelector('.overlay-image__image');
 export const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__capture');
 const formProfileValidation = new FormValidator(formsValidationConfig, formProfile);
 const formAddCardsValidation = new FormValidator(formsValidationConfig, formAddCards);
+const inputs = document.querySelectorAll('.popup__input');
+
 
 /*Functions*/
 export function openPopup(e) {
     e.classList.add(overlayActiveClass);
     document.addEventListener('keydown', closeByEscape);
+    const event = new Event('input');
+    inputs.forEach(input => {
+        input.dispatchEvent(event)
+    });
 }
 
 function closePopup(e) {
@@ -95,50 +77,56 @@ function submitProfileForm(event) {
     subtitle.textContent = popupSubtitle.value;
     closePopup(overlayProfile);
 }
-// Adding new card to the cards using -=Class Card=-
+// Adding new card to the cards
+function addCard(card) {
+    cards.prepend(card);
+}
+//Rendering a card using -=class Card=-
 function renderCard(data, cardsTemplate) {
     const card = new Card({
         name: data.name,
         link: data.link
     }, cardsTemplate);
     const cardElement = card.createCard();
-    cards.prepend(cardElement);
+    return cardElement;
 };
 // Adding a card from the list
 initialCards.forEach(item => {
     const nameElement = item.name;
     const linkElement = item.link;
-    renderCard({
+    const cardElement = renderCard({
         name: nameElement,
         link: linkElement
     }, cardsTemplate);
+    addCard(cardElement);
 });
 // Adding a card from the form
-const handlerAddCard = (e) => {
+const handleAddCard = (e) => {
     e.preventDefault();
     const nameCard = inputPlaceName.value;
     const linkCard = inputLink.value;
-    renderCard({
+    const cardElement = renderCard({
         name: nameCard,
         link: linkCard
     }, cardsTemplate);
+    addCard(cardElement);
     inputPlaceName.value = "";
     inputLink.value = "";
     formAddCardsValidation.setSubmitButtonState();
     closePopup(overlayAdd);
 };
+formProfileValidation.enableValidation();
+formAddCardsValidation.enableValidation();
+
 formProfile.addEventListener('submit', submitProfileForm);
-formAddCards.addEventListener('submit', handlerAddCard);
+formAddCards.addEventListener('submit', handleAddCard);
 addButton.addEventListener('click', () => {
     openPopup(overlayAdd)
-    formAddCardsValidation.enableValidation(inputPlaceName);
-    formAddCardsValidation.enableValidation(inputLink);
 });
 editIcon.addEventListener('click', (e) => {
     popupTitle.value = title.textContent;
     popupSubtitle.value = subtitle.textContent;
     openPopup(overlayProfile);
-    formProfileValidation.enableValidation();
 });
 closeBtnProfile.addEventListener('click', () => {
     closePopup(overlayProfile);

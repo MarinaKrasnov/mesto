@@ -39,22 +39,25 @@ export const overlayImage = document.querySelector('.overlay-image__image');
 export const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__capture');
 const formProfileValidation = new FormValidator(formsValidationConfig, formProfile);
 const formAddCardsValidation = new FormValidator(formsValidationConfig, formAddCards);
-const inputs = document.querySelectorAll('.popup__input');
-
+const inputs = [...document.querySelectorAll('.popup__input')];
 
 /*Functions*/
 export function openPopup(e) {
     e.classList.add(overlayActiveClass);
     document.addEventListener('keydown', closeByEscape);
-    const event = new Event('input');
-    inputs.forEach(input => {
-        input.dispatchEvent(event)
-    });
+    if (e === overlayProfile) {
+        formProfileValidation.setSubmitButtonState();
+        formProfileValidation.deleteErrorClass();
+    }
+    if (e === overlayAdd) {
+        formAddCardsValidation.deleteErrorClass();
+    }
 }
 
 function closePopup(e) {
     e.classList.remove(overlayActiveClass);
     document.removeEventListener('keydown', closeByEscape);
+
 }
 // Closing popup by clicking outside of the popup
 function closeByClickingOutside(event, overlay) {

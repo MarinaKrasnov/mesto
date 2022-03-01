@@ -42,7 +42,7 @@ export class Card {
         this._cardElement.querySelector('.card__text').textContent = this._name;
         this._cardImage.alt = `Виды на ${this._name}`;
         this._cardImage.src = this._link;
-        this._setEventListeners()
+        this._setEventListeners();
         return this._cardElement;
     };
 }

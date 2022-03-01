@@ -45,19 +45,11 @@ const inputs = [...document.querySelectorAll('.popup__input')];
 export function openPopup(e) {
     e.classList.add(overlayActiveClass);
     document.addEventListener('keydown', closeByEscape);
-    if (e === overlayProfile) {
-        formProfileValidation.setSubmitButtonState();
-        formProfileValidation.deleteErrorClass();
-    }
-    if (e === overlayAdd) {
-        formAddCardsValidation.deleteErrorClass();
-    }
 }
 
 function closePopup(e) {
     e.classList.remove(overlayActiveClass);
     document.removeEventListener('keydown', closeByEscape);
-
 }
 // Closing popup by clicking outside of the popup
 function closeByClickingOutside(event, overlay) {
@@ -116,17 +108,21 @@ const handleAddCard = (e) => {
     formAddCardsValidation.setSubmitButtonState();
     closePopup(overlayAdd);
 };
+// Turning the validation on using -=class FormValidator=-
 formProfileValidation.enableValidation();
 formAddCardsValidation.enableValidation();
 
 formProfile.addEventListener('submit', submitProfileForm);
 formAddCards.addEventListener('submit', handleAddCard);
 addButton.addEventListener('click', () => {
+    formAddCardsValidation.deleteErrorClass();
     openPopup(overlayAdd)
 });
 editIcon.addEventListener('click', (e) => {
     popupTitle.value = title.textContent;
     popupSubtitle.value = subtitle.textContent;
+    formProfileValidation.setSubmitButtonState();
+    formProfileValidation.deleteErrorClass();
     openPopup(overlayProfile);
 });
 closeBtnProfile.addEventListener('click', () => {

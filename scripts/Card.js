@@ -1,20 +1,15 @@
 import {
-    openPopup,
-    overlayImage,
-    overlayImageCapture,
-    overlayImageWrapper
+    popupWithImage
 } from './index.js';
-export class Card {
+export default class Card {
     constructor(data, cardsTemplate) {
         this._name = data.name;
         this._link = data.link;
         this._template = cardsTemplate;
+        this.data = data;
     }
     _handleImageClick = () => {
-        openPopup(overlayImageWrapper);
-        overlayImage.src = this._link;
-        overlayImage.alt = `Виды на ${this._name}`;
-        overlayImageCapture.textContent = this._name;
+        popupWithImage.open(this.data);
     }
     _handleButtonLike = () => {
         this._buttonLike.classList.toggle('card__button-like_active')

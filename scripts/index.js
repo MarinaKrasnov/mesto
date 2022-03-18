@@ -1,9 +1,22 @@
 import {
     FormValidator
 } from "./FormValidator.js";
+import
+Card
+from './Card.js';
 import {
-    Card
-} from './Card.js';
+    initialCards
+} from "./initial_cards.js";
+import Section from "./Section.js";
+import {
+    PopupWithForm
+} from "./PopupWithForm.js";
+import {
+    PopupWithImage
+} from "./PopupWithImage.js";
+import {
+    UserInfo
+} from "./UserInfo.js";
 /* Variables */
 export const formsValidationConfig = {
     formSelector: '.overlay__form',
@@ -13,124 +26,71 @@ export const formsValidationConfig = {
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
 }
-import {
-    initialCards
-} from "./initial_cards.js";
-const editIcon = document.querySelector('.profile__icon');
-const overlayActiveClass = 'overlay_active';
-const title = document.querySelector('.profile__title');
-const subtitle = document.querySelector('.profile__subtitle');
-const popupTitle = document.querySelector('.popup__input_value_name');
-const popupSubtitle = document.querySelector('.popup__input_value_profession');
+export const editIcon = document.querySelector('.profile__icon');
+export const overlayActiveClass = 'overlay_active';
+export const title = document.querySelector('.profile__title');
+export const subtitle = document.querySelector('.profile__subtitle');
+export const popupTitle = document.querySelector('.popup__input_value_name');
+export const popupSubtitle = document.querySelector('.popup__input_value_profession');
 const formProfile = document.querySelector('[name="form-profile"]');
-const overlayProfile = document.querySelector('.overlay-profile');
-const overlayAdd = document.querySelector('.overlay-add');
 export const overlayImageWrapper = document.querySelector('.overlay-image');
-const closeBtnProfile = overlayProfile.querySelector('.close-btn');
-const buttonCloseImage = overlayImageWrapper.querySelector('.close-btn');
-const closeBtnAdd = overlayAdd.querySelector('.close-btn');
 const addButton = document.querySelector('.profile__add-button');
-const cards = document.querySelector('.cards');
-const cardsTemplate = document.querySelector('#card-template').content.querySelector('.card');
+export const cardsTemplate = document.querySelector('#card-template').content.querySelector('.card');
 const formAddCards = document.querySelector('[name="new-place"]');
 const inputPlaceName = document.querySelector('.popup__input_type_place-name');
 const inputLink = document.querySelector('.popup__input_type_link');
 export const overlayImage = document.querySelector('.overlay-image__image');
 export const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__capture');
+
+//Specify validator for each form using class -=FormValidator=-
 const formProfileValidation = new FormValidator(formsValidationConfig, formProfile);
 const formAddCardsValidation = new FormValidator(formsValidationConfig, formAddCards);
-const inputs = [...document.querySelectorAll('.popup__input')];
-
-/*Functions*/
-export function openPopup(e) {
-    e.classList.add(overlayActiveClass);
-    document.addEventListener('keydown', closeByEscape);
-}
-
-function closePopup(e) {
-    e.classList.remove(overlayActiveClass);
-    document.removeEventListener('keydown', closeByEscape);
-}
-// Closing popup by clicking outside of the popup
-function closeByClickingOutside(event, overlay) {
-    const hasOverlayActiveClass = [...event.target.classList].includes(overlayActiveClass);
-    if (hasOverlayActiveClass) {
-        closePopup(overlay)
-    }
-};
-//Closing popup with a help of button 'Escape'
-function closeByEscape(evt) {
-    if (evt.key === 'Escape') {
-        const overlayActive = document.querySelector('.overlay_active');
-        closePopup(overlayActive);
-    }
-};
-
-function submitProfileForm(event) {
-    event.preventDefault();
-    title.textContent = popupTitle.value;
-    subtitle.textContent = popupSubtitle.value;
-    closePopup(overlayProfile);
-}
-// Adding new card to the cards
-function addCard(card) {
-    cards.prepend(card);
-}
-//Rendering a card using -=class Card=-
-function renderCard(data, cardsTemplate) {
-    const card = new Card({
-        name: data.name,
-        link: data.link
-    }, cardsTemplate);
-    const cardElement = card.createCard();
-    return cardElement;
-};
-// Adding a card from the list
-initialCards.forEach(item => {
-    const nameElement = item.name;
-    const linkElement = item.link;
-    addCard(renderCard({
-        name: nameElement,
-        link: linkElement
-    }, cardsTemplate));
-});
-// Adding a card from the form
-const handleAddCard = (e) => {
+//Specify popup for each form using class -=PopupWithForm=- 
+const popupWithFormAdd = new PopupWithForm('.overlay-add', (e) => {
     e.preventDefault();
-    const nameCard = inputPlaceName.value;
-    const linkCard = inputLink.value;
-    addCard(renderCard({
-        name: nameCard,
-        link: linkCard
-    }, cardsTemplate));
-    inputPlaceName.value = "";
-    inputLink.value = "";
+    const itemForm = {
+        name: inputPlaceName.value,
+        link: inputLink.value
+    };
+    const cardElement = section._renderer(itemForm);
+    section.addItem(cardElement);
     formAddCardsValidation.setSubmitButtonState();
-    closePopup(overlayAdd);
-};
+    popupWithFormAdd.close();
+});
+const popupWithFormProfile = new PopupWithForm('.overlay-profile', (event) => {
+    event.preventDefault();
+    userInfo.setUserInfo();
+    popupWithFormProfile.close();
+});
+//Filling profile form with a help of class -=UserInfo=-
+const userInfo = new UserInfo(popupWithFormProfile._getInputValues());
+//Specify popup using class -=PopupWithImage=-
+export const popupWithImage = new PopupWithImage('.overlay-image');
+//Adding a card from initial_cards.js using class -=Section=-
+export const section = new Section({
+        items: initialCards,
+        renderer: (item) => {
+            const card = new Card({
+                name: item.name,
+                link: item.link
+            }, cardsTemplate);
+            const cardElement = card.createCard();
+            return cardElement;
+        }
+    },
+    '.cards');
+section.renderItems();
 // Turning the validation on using -=class FormValidator=-
 formProfileValidation.enableValidation();
 formAddCardsValidation.enableValidation();
-
-formProfile.addEventListener('submit', submitProfileForm);
-formAddCards.addEventListener('submit', handleAddCard);
+// Listeners for buttons
 addButton.addEventListener('click', () => {
     formAddCardsValidation.deleteErrorClass();
-    openPopup(overlayAdd)
+    popupWithFormAdd.open();
 });
-editIcon.addEventListener('click', (e) => {
-    popupTitle.value = title.textContent;
-    popupSubtitle.value = subtitle.textContent;
+editIcon.addEventListener('click', () => {
     formProfileValidation.setSubmitButtonState();
     formProfileValidation.deleteErrorClass();
-    openPopup(overlayProfile);
+    userInfo.getUserInfo();
+    popupWithFormProfile.open();
 });
-closeBtnProfile.addEventListener('click', () => {
-    closePopup(overlayProfile);
-});
-closeBtnAdd.addEventListener('click', () => closePopup(overlayAdd));
-buttonCloseImage.addEventListener('click', () => closePopup(overlayImageWrapper));
-
-overlayProfile.addEventListener('click', (evt) => closeByClickingOutside(evt, overlayProfile));
-overlayAdd.addEventListener('click', (e) => closeByClickingOutside(e, overlayAdd));
-overlayImageWrapper.addEventListener('click', (ev) => closeByClickingOutside(ev, overlayImageWrapper));

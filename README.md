@@ -20,6 +20,7 @@ Training to build responsive mobile adaptive project. The project is an example 
 * Flexbox
 * Grid
 * JS
+* Webpack
 
 **Project Brief** 
 

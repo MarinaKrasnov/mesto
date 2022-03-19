@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Marina Krasnova">
+    <title>Mesto</title>
+</head>
+
+<body class="page">
+    <header class="header">
+        <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип Место">
+    </header>
+    <main class="content">
+        <div class="profile">
+            <div class="profile__container">
+                <div class="profile__avatar">
+                </div>
+                <div class="profile__info">
+                    <div class="profile__titleicon">
+                        <h1 class="profile__title">Жак-Ив Кусто</h1>
+                        <button type="button" class="button" aria-label="Кнопка редактирования">
+                            <img src="<%=require('./images/Vector-2.svg')%>" alt="Иконка редактирования"
+                                class=" profile__icon">
+                        </button>
+                    </div>
+                    <p class="profile__subtitle">Исследователь океана</p>
+                </div>
+            </div>
+            <button class="button" aria-label="Кнопка добавления"><img src="<%=require('./images/Vector-3.svg')%>"
+                    alt="Иконка добавления" class="profile__add-button">
+            </button>
+        </div>
+        <section class="cards">
+        </section>
+
+    </main>
+    <footer class="footer">
+        <p>© 2020 Mesto Russia</p>
+    </footer>
+    <template id="card-template">
+        <article class="card" aria-label="Карточка">
+            <img class="card__image" src="#" alt="Виды природы">
+            <button type="button" class="button card__button-delete" aria-label="Кнопка удаления карточки">
+            </button>
+            <div class="card__info">
+                <h3 class="card__text">${item.name-place}</h3>
+                <button type="button" class="button card__button-like " aria-label="Кнопка лайк">
+                </button>
+            </div>
+        </article>
+    </template>
+    <div class="overlay overlay-profile">
+        <form class="overlay__form" name="form-profile" novalidate>
+            <fieldset class="popup ">
+                <h2 class="popup__maintitle">Редактировать профиль</h2>
+                <input id="name" type="text" name="name" class="popup__input popup__input_value_name" placeholder="Имя"
+                    minlength="2" maxlength="40" required>
+                <span id="name-error" class="popup__error"></span>
+                <input id="profession" type="text" name="profession" class="popup__input popup__input_value_profession"
+                    placeholder="Профессия" minlength="2" maxlength="200" required>
+                <span id="profession-error" class="popup__error"></span>
+                <button type="submit" class="popup__submit" aria-label="Кнопка сохранить">
+                    Сохранить
+                </button>
+                <button type="button" class="button close-btn"></button>
+            </fieldset>
+        </form>
+    </div>
+    <div class="overlay overlay-add ">
+        <form class="overlay__form" name="new-place" novalidate>
+            <fieldset class="popup ">
+                <h2 class="popup__maintitle">Новое место</h2>
+                <input id="name-place" type="text" name="name-place" class="popup__input popup__input_type_place-name"
+                    placeholder="Название" minlength="2" maxlength="30" required>
+                <span id="name-place-error" class="popup__error"></span>
+                <input id="url" type="url" name="url" class="popup__input popup__input_type_link"
+                    placeholder="Ссылка на картинку" required>
+                <span id="url-error" class="popup__error"></span>
+                <button type="submit" class="popup__submit popup__submit-add" aria-label="Кнопка создать">
+                    Создать
+                </button>
+                <button type="button" class="button close-btn"></button>
+            </fieldset>
+        </form>
+    </div>
+    <div class="overlay overlay-image ">
+        <div class="overlay-image__content ">
+
+            <img src="#" class="overlay-image__image" alt="Увеличенное фото">
+            <button type="button" class="button close-btn "></button>
+            <p class="overlay-image__capture"></p>
+        </div>
+    </div>
+</body>
+
+</html>

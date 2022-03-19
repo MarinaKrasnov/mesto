@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "..\\russian-travel"
+		},
+		{
+			"path": "..\\mesto"
+		},
+		{
+			"path": "..\\how-to-learn"
+		},
+		{
+			"path": "..\\praktikum"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "mesto"
+	}
+}

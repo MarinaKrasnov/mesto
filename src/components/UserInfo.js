@@ -3,7 +3,7 @@ import {
     subtitle,
     popupTitle,
     popupSubtitle
-} from './index.js';
+} from './../pages/index.js';
 export class UserInfo {
     constructor({
         name,

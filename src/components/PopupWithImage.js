@@ -5,7 +5,7 @@ import {
 import {
     overlayImage,
     overlayImageCapture
-} from "./index.js";
+} from "./../pages/index.js";
 
 export class PopupWithImage extends Popup {
     open(data) {

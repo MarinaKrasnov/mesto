@@ -1,6 +1,6 @@
 import {
     popupWithImage
-} from './index.js';
+} from './../pages/index.js';
 export default class Card {
     constructor(data, cardsTemplate) {
         this._name = data.name;

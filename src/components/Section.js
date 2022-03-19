@@ -1,7 +1,7 @@
 import Card from './Card.js';
 import {
     cardsTemplate
-} from './index.js';
+} from './../pages/index.js';
 import {
     initialCards
 } from './initial_cards.js';

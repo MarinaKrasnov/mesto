@@ -1,6 +1,6 @@
 import {
     overlayActiveClass
-} from "./index.js";
+} from "./../pages/index.js";
 export class Popup {
     constructor(popupSelector) {
         this._popup = document.querySelector(popupSelector);

@@ -1,23 +1,22 @@
-import {
-    title,
-    subtitle,
-    popupTitle,
-    popupSubtitle
-} from './../pages/index.js';
 export class UserInfo {
-    constructor({
+    constructor(
         name,
         profession
-    }) {
-        this._name = name;
-        this._profession = profession;
+    ) {
+        this._name = document.querySelector(name);
+        this._profession = document.querySelector(profession);
     }
     getUserInfo() {
-        popupTitle.value = title.textContent;
-        popupSubtitle.value = subtitle.textContent;
+        return {
+            name: this._name.textContent,
+            profession: this._profession.textContent
+        };
     }
-    setUserInfo() {
-        title.textContent = popupTitle.value;
-        subtitle.textContent = popupSubtitle.value;
+    setUserInfo(data) {
+        console.log(data.name);
+        console.log(this._name);
+        this._name.textContent = data.name;
+        this._profession.textContent = data.profession;
+
     }
 }

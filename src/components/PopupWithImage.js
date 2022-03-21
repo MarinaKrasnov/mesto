@@ -10,8 +10,8 @@ import {
 export class PopupWithImage extends Popup {
     open(data) {
         super.open();
-        overlayImage.src = data.link;
         overlayImage.alt = `Виды на ${data.name}`;
         overlayImageCapture.textContent = data.name;
+        overlayImage.src = data.link;
     }
 }

@@ -1,15 +1,10 @@
-import {
-    popupWithImage
-} from './../pages/index.js';
 export default class Card {
     constructor(data, cardsTemplate) {
         this._name = data.name;
         this._link = data.link;
         this._template = cardsTemplate;
         this.data = data;
-    }
-    _handleImageClick = () => {
-        popupWithImage.open(this.data);
+        this._handleImageClick = data.handleImageClick;
     }
     _handleButtonLike = () => {
         this._buttonLike.classList.toggle('card__button-like_active')

@@ -72,8 +72,8 @@ const popupWithFormAdd = new PopupWithForm('.overlay-add', (cardData) => {
     formAddCardsValidation.setSubmitButtonState();
     popupWithFormAdd.close();
 });
-const popupWithFormProfile = new PopupWithForm('.overlay-profile', (user) => {
-    userInfo.setUserInfo(user);
+const popupWithFormProfile = new PopupWithForm('.overlay-profile', (userData) => {
+    userInfo.setUserInfo(userData);
     popupWithFormProfile.close();
 });
 //Filling profile form with a help of class -=UserInfo=-
@@ -84,8 +84,7 @@ export const popupWithImage = new PopupWithImage('.overlay-image');
 export const section = new Section({
         items: initialCards,
         renderer: (item) => {
-            const cardElement = getCard(item);
-            section.addItem(cardElement);
+            section.addItem(getCard(item));
         }
     },
     '.cards');
@@ -107,9 +106,7 @@ editIcon.addEventListener('click', () => {
     popupSubtitle.value = userData.profession;
     popupWithFormProfile.open();
 });
-closeBtnProfile.addEventListener('click', () => {
-    popupWithFormProfile.close();
-});
+closeBtnProfile.addEventListener('click', () => popupWithFormProfile.close());
 closeBtnAdd.addEventListener('click', () => popupWithFormAdd.close());
 buttonCloseImage.addEventListener('click', () => popupWithImage.close());
 overlayProfile.addEventListener('click', (evt) => popupWithFormProfile.closeByClickingOutside(evt));

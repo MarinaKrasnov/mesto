@@ -48,26 +48,28 @@ const closeBtnProfile = overlayProfile.querySelector('.close-btn');
 const buttonCloseImage = overlayImageWrapper.querySelector('.close-btn');
 const closeBtnAdd = overlayAdd.querySelector('.close-btn');
 // Funcions
-function getCard(item) {
+function getCard(itemElement) {
     const card = new Card({
-        name: item.name,
-        link: item.link,
+        name: itemElement.name,
+        link: itemElement.link,
         handleImageClick: () => {
-            popupWithImage.open(item)
+            popupWithImage.open(itemElement)
         }
     }, cardsTemplate);
-    const cardElement = card.createCard();
-    return cardElement
+    return card.createCard()
 }
 //Specify validator for each form using class -=FormValidator=-
 const formProfileValidation = new FormValidator(formsValidationConfig, formProfile);
 const formAddCardsValidation = new FormValidator(formsValidationConfig, formAddCards);
+//Filling profile form with a help of class -=UserInfo=-
+const userInfo = new UserInfo('.profile__title', '.profile__subtitle');
 //Specify popup for each form using class -=PopupWithForm=- 
 const popupWithFormAdd = new PopupWithForm('.overlay-add', (cardData) => {
     const itemForm = {
         name: cardData.place,
         link: cardData.url
     };
+    console.log(itemForm);
     section.renderer(itemForm);
     formAddCardsValidation.setSubmitButtonState();
     popupWithFormAdd.close();
@@ -76,15 +78,13 @@ const popupWithFormProfile = new PopupWithForm('.overlay-profile', (userData) =>
     userInfo.setUserInfo(userData);
     popupWithFormProfile.close();
 });
-//Filling profile form with a help of class -=UserInfo=-
-const userInfo = new UserInfo('.profile__title', '.profile__subtitle');
 //Specify popup using class -=PopupWithImage=-
 export const popupWithImage = new PopupWithImage('.overlay-image');
 //Adding a card from initial_cards.js using class -=Section=-
 export const section = new Section({
         items: initialCards,
-        renderer: (item) => {
-            section.addItem(getCard(item));
+        renderer: (element) => {
+            section.addItem(getCard(element));
         }
     },
     '.cards');

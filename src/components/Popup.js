@@ -9,7 +9,6 @@ export class Popup {
         if (evt.key === 'Escape') {
             this.close();
         }
-        document.removeEventListener('keydown', (e) => this._handleEscClose(e));
     };
     // Closing popup by clicking outside of the popup
     closeByClickingOutside(event) {
@@ -18,11 +17,15 @@ export class Popup {
             this.close()
         }
     };
+    _setEventListeners() {
+        document.addEventListener('keydown', (e) => this._handleEscClose(e));
+    }
     open() {
         this._popup.classList.add(overlayActiveClass);
-        document.addEventListener('keydown', (e) => this._handleEscClose(e));
+        this._setEventListeners();
     }
     close() {
         this._popup.classList.remove(overlayActiveClass);
+        document.removeEventListener('keydown', (e) => this._handleEscClose(e));
     }
 }

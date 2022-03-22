@@ -17,15 +17,14 @@ export class Popup {
             this.close()
         }
     };
-    _setEventListeners() {
-        document.addEventListener('keydown', (e) => this._handleEscClose(e));
+    setEventListeners() {
+        document.addEventListener('keydown', this._handleEscClose.bind(this));
     }
     open() {
         this._popup.classList.add(overlayActiveClass);
-        this._setEventListeners();
     }
     close() {
         this._popup.classList.remove(overlayActiveClass);
-        document.removeEventListener('keydown', (e) => this._handleEscClose(e));
+        document.removeEventListener('keydown', this._handleEscClose.bind(this));
     }
 }

@@ -27,19 +27,15 @@ export const formsValidationConfig = {
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__error_visible'
 }
-export const editIcon = document.querySelector('.profile__icon');
+const editIcon = document.querySelector('.profile__icon');
 export const overlayActiveClass = 'overlay_active';
-export const title = document.querySelector('.profile__title');
-export const subtitle = document.querySelector('.profile__subtitle');
-export const popupTitle = document.querySelector('.popup__input_value_name');
-export const popupSubtitle = document.querySelector('.popup__input_value_profession');
+const popupTitle = document.querySelector('.popup__input_value_name');
+const popupSubtitle = document.querySelector('.popup__input_value_profession');
 const formProfile = document.querySelector('[name="form-profile"]');
 export const overlayImageWrapper = document.querySelector('.overlay-image');
 const addButton = document.querySelector('.profile__add-button');
-export const cardsTemplate = document.querySelector('#card-template').content.querySelector('.card');
+const cardsTemplate = document.querySelector('#card-template').content.querySelector('.card');
 const formAddCards = document.querySelector('[name="new-place"]');
-const inputPlaceName = document.querySelector('.popup__input_type_place-name');
-const inputLink = document.querySelector('.popup__input_type_link');
 export const overlayImage = document.querySelector('.overlay-image__image');
 export const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__capture');
 const overlayProfile = document.querySelector('.overlay-profile');
@@ -69,7 +65,6 @@ const popupWithFormAdd = new PopupWithForm('.overlay-add', (cardData) => {
         name: cardData.place,
         link: cardData.url
     };
-    console.log(itemForm);
     section.renderer(itemForm);
     formAddCardsValidation.setSubmitButtonState();
     popupWithFormAdd.close();
@@ -93,9 +88,11 @@ section.renderItems();
 formProfileValidation.enableValidation();
 formAddCardsValidation.enableValidation();
 // Listeners for buttons
+popupWithFormAdd.setEventListeners();
+popupWithFormProfile.setEventListeners();
 addButton.addEventListener('click', () => {
     formAddCardsValidation.deleteErrorClass();
-    /*    formAddCardsValidation.setSubmitButtonState(); */
+    formAddCardsValidation.setSubmitButtonState();
     popupWithFormAdd.open();
 });
 editIcon.addEventListener('click', () => {

@@ -4,8 +4,10 @@ import {
 export class Popup {
     constructor(popupSelector) {
         this._popup = document.querySelector(popupSelector);
+        this._closeBtn = this._popup.querySelector('.close-btn');
     }
-    _handleEscClose(evt) {
+    // Closing popup by clicking button Esc
+    _handleEscClose = (evt) => {
         if (evt.key === 'Escape') {
             this.close();
         }
@@ -18,13 +20,15 @@ export class Popup {
         }
     };
     setEventListeners() {
-        document.addEventListener('keydown', this._handleEscClose.bind(this));
+        this._closeBtn.addEventListener('click', () => this.close());
+        this._popup.addEventListener('click', (evt) => this.closeByClickingOutside(evt));
     }
     open() {
         this._popup.classList.add(overlayActiveClass);
+        document.addEventListener('keydown', this._handleEscClose);
     }
     close() {
         this._popup.classList.remove(overlayActiveClass);
-        document.removeEventListener('keydown', this._handleEscClose.bind(this));
+        document.removeEventListener('keydown', this._handleEscClose);
     }
 }

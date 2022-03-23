@@ -8,15 +8,12 @@ export class UserInfo {
     }
     getUserInfo() {
         return {
-            name: this._name.textContent,
+            user: this._name.textContent,
             profession: this._profession.textContent
         };
     }
     setUserInfo(data) {
-        console.log(data.name);
-        console.log(this._name);
-        this._name.textContent = data.name;
+        this._name.textContent = data.user;
         this._profession.textContent = data.profession;
-
     }
 }

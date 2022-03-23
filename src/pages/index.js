@@ -61,11 +61,7 @@ const formAddCardsValidation = new FormValidator(formsValidationConfig, formAddC
 const userInfo = new UserInfo('.profile__title', '.profile__subtitle');
 //Specify popup for each form using class -=PopupWithForm=- 
 const popupWithFormAdd = new PopupWithForm('.overlay-add', (cardData) => {
-    const itemForm = {
-        name: cardData.place,
-        link: cardData.url
-    };
-    section.renderer(itemForm);
+    section.addItem(getCard(cardData));
     formAddCardsValidation.setSubmitButtonState();
     popupWithFormAdd.close();
 });
@@ -79,7 +75,7 @@ export const popupWithImage = new PopupWithImage('.overlay-image');
 export const section = new Section({
         items: initialCards,
         renderer: (element) => {
-            section.addItem(getCard(element));
+            return getCard(element);
         }
     },
     '.cards');
@@ -90,6 +86,7 @@ formAddCardsValidation.enableValidation();
 // Listeners for buttons
 popupWithFormAdd.setEventListeners();
 popupWithFormProfile.setEventListeners();
+popupWithImage.setEventListeners();
 addButton.addEventListener('click', () => {
     formAddCardsValidation.deleteErrorClass();
     formAddCardsValidation.setSubmitButtonState();
@@ -99,13 +96,7 @@ editIcon.addEventListener('click', () => {
     formProfileValidation.setSubmitButtonState();
     formProfileValidation.deleteErrorClass();
     const userData = userInfo.getUserInfo();
-    popupTitle.value = userData.name;
+    popupTitle.value = userData.user;
     popupSubtitle.value = userData.profession;
     popupWithFormProfile.open();
 });
-closeBtnProfile.addEventListener('click', () => popupWithFormProfile.close());
-closeBtnAdd.addEventListener('click', () => popupWithFormAdd.close());
-buttonCloseImage.addEventListener('click', () => popupWithImage.close());
-overlayProfile.addEventListener('click', (evt) => popupWithFormProfile.closeByClickingOutside(evt));
-overlayAdd.addEventListener('click', (e) => popupWithFormAdd.closeByClickingOutside(e));
-overlayImageWrapper.addEventListener('click', (ev) => popupWithImage.closeByClickingOutside(ev));

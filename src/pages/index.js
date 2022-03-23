@@ -38,11 +38,6 @@ const cardsTemplate = document.querySelector('#card-template').content.querySele
 const formAddCards = document.querySelector('[name="new-place"]');
 export const overlayImage = document.querySelector('.overlay-image__image');
 export const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__capture');
-const overlayProfile = document.querySelector('.overlay-profile');
-const overlayAdd = document.querySelector('.overlay-add');
-const closeBtnProfile = overlayProfile.querySelector('.close-btn');
-const buttonCloseImage = overlayImageWrapper.querySelector('.close-btn');
-const closeBtnAdd = overlayAdd.querySelector('.close-btn');
 // Funcions
 function getCard(itemElement) {
     const card = new Card({

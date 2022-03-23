@@ -70,7 +70,7 @@ export const popupWithImage = new PopupWithImage('.overlay-image');
 export const section = new Section({
         items: initialCards,
         renderer: (element) => {
-            return getCard(element);
+            section.addItem(getCard(element));
         }
     },
     '.cards');

@@ -1,8 +1,11 @@
+import {
+    api
+} from './../pages/index.js'
 export default class Section {
     constructor({
         items,
         renderer
-    }, containerSelector) {
+    }, containerSelector, api) {
         this._container = document.querySelector(containerSelector);
         this._renderer = renderer;
         this._items = items;
@@ -10,7 +13,6 @@ export default class Section {
     renderItems() {
         this._items.forEach(item => {
             this._renderer(item);
-
         });
     }
     addItem(card) {

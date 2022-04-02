@@ -16,8 +16,14 @@
     <main class="content">
         <div class="profile">
             <div class="profile__container">
+
+
                 <div class="profile__avatar">
+                    <div class=" profile__overlay" aria-label="Обновить">
+                    </div>
                 </div>
+
+
                 <div class="profile__info">
                     <div class="profile__titleicon">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -47,8 +53,11 @@
             </button>
             <div class="card__info">
                 <h3 class="card__text">${item.name-place}</h3>
-                <button type="button" class="button card__button-like " aria-label="Кнопка лайк">
-                </button>
+                <div class="card__likes">
+                    <button type="button" class="button card__button-like " aria-label="Кнопка лайк">
+                    </button>
+                    <p class="card__number-likes">0</p>
+                </div>
             </div>
         </article>
     </template>
@@ -93,6 +102,29 @@
             <button type="button" class="button close-btn "></button>
             <p class="overlay-image__capture"></p>
         </div>
+    </div>
+    <div class="overlay overlay-ausure">
+        <div class="popup popup_type_ausure">
+            <h2 class="popup__maintitle">Вы уверены?</h2>
+            <button type="submit" class="popup__submit" aria-label="Кнопка согласия">
+                Да
+            </button>
+            <button type="button" class="button close-btn"></button>
+        </div>
+    </div>
+    <div class="overlay overlay-avatar ">
+        <form class="overlay__form" name="avatar-form" novalidate>
+            <fieldset class="popup popup_type_avatar ">
+                <h2 class="popup__maintitle">Обновить аватар</h2>
+                <input id="url" type="url" name="avatar" class="popup__input popup__input_type_avatar"
+                    placeholder="Ссылка на картинку" required>
+                <span id="url-error" class="popup__error"></span>
+                <button type="submit" class="popup__submit popup__submit-add" aria-label="Кнопка создать">
+                    Сохранить
+                </button>
+                <button type="button" class="button close-btn"></button>
+            </fieldset>
+        </form>
     </div>
 </body>
 

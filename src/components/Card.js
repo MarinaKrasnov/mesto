@@ -1,15 +1,45 @@
+import {
+    myId,
+    apiOut
+} from "./../pages/index.js";
 export default class Card {
     constructor(data, cardsTemplate) {
         this._name = data.name;
         this._link = data.link;
         this._template = cardsTemplate;
         this._handleImageClick = data.handleImageClick;
+        this._id = data.id;
+        this._owner = data.owner._id;
+        this._likes = data.likes;
+        this._handleDeleteClick = data.handleDeleteClick;
+        this._liked = false;
     }
     _handleButtonLike = () => {
-        this._buttonLike.classList.toggle('card__button-like_active')
+        console.log(this._numberLikes);
+        /*         this._liked = (this.likes.contains(myId) ? () => {
+                        this._buttonLike.classList.add('card__button-like_active')
+                    } : () => {
+                        this._buttonLike.classList.remove('card__button-like_active')
+                    };  */
+        console.log(this._liked);
+        return this._liked;
     }
-    _handleButtonBin = () => {
-        this._cardElement.remove();
+    /* 
+    
+    if (this._liked) {
+        this._liked = true;
+        this._buttonLike.classList.add('card__button-like_active')
+        apiOut.putLike(this._id).then((res) => {
+            this._numberLikes.textContent = this._likes.length;
+            console.log(res);
+                })
+            } */
+
+    handleButtonBin = () => {
+        console.log(this._id);
+        apiOut.deleteCard(this._id).then((res) => {
+            this._cardElement.remove();
+        }).catch((err) => alert(`Server can't delete this card.Try again later. Object ${err.status}`))
     }
     _getTemplate() {
         return this._template.cloneNode(true);
@@ -22,7 +52,11 @@ export default class Card {
         this._buttonLike.addEventListener('click', this._handleButtonLike);
         //Hanging a button "bin" on a card
         this._buttonBin = this._cardElement.querySelector('.card__button-delete');
-        this._buttonBin.addEventListener('click', this._handleButtonBin);
+        if (myId === this._owner) {
+            this._buttonBin.addEventListener('click', this._handleDeleteClick);
+        } else {
+            this._buttonBin.remove()
+        }
     }
     // Creating a card
     createCard() {
@@ -31,6 +65,8 @@ export default class Card {
         this._cardElement.querySelector('.card__text').textContent = this._name;
         this._cardImage.alt = `Виды на ${this._name}`;
         this._cardImage.src = this._link;
+        this._numberLikes = this._cardElement.querySelector('.card__number-likes');
+        this._numberLikes.textContent = this._likes.length;
         this._setEventListeners();
         return this._cardElement;
     };

@@ -1,0 +1,43 @@
+{
+  "cards": [{
+      "name": "Архыз",
+      "id": 1,
+      "link": "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
+    },
+    {
+      "name": "Челябинская область",
+      "id": 2,
+      "link": "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg"
+    },
+    {
+      "name": "Иваново",
+      "id": 3,
+      "link": "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg"
+    },
+    {
+      "name": "Камчатка",
+      "id": 4,
+      "link": "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg"
+    },
+    {
+      "name": "Холмогорский район",
+      "id": 5,
+      "link": "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg"
+    },
+    {
+      "name": "Байкал",
+      "id": 6,
+      "link": "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
+    },
+    {
+      "name": "пляж",
+      "link": "https://s1.1zoom.ru/b5242/716/Sky_Coast_Sea_Tropics_Beach_Clouds_529897_3840x2160.jpg",
+      "id": 7
+    },
+    {
+      "name": "пляж",
+      "link": "https://s1.1zoom.ru/b5242/716/Sky_Coast_Sea_Tropics_Beach_Clouds_529897_3840x2160.jpg",
+      "id": 8
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 .profile__avatar {
     border-radius: 120px;
-    background: url(../../../images/image-4.jpg);
+    background-image: url(../../../images/image-4.jpg);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;

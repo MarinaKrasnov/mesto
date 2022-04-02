@@ -21,6 +21,9 @@ import {
 import {
     API
 } from "./../components/API.js";
+import {
+    PopupAUSure
+} from '../components/PopupAUSure.js';
 /* Variables */
 export const formsValidationConfig = {
     formSelector: '.overlay__form',
@@ -47,21 +50,33 @@ const avatar = document.querySelector('.profile__avatar');
 let section;
 let card;
 // Funcions
+function handleButtonBin(item) {
+    console.log(item._id);
+    apiOut.deleteCard(item._id).then((res) => {
+        item.remove();
+        popupAUSure.close();
+    }).catch((err) => alert(`Server can't delete this card.Try again later. Object ${err.status}`))
+
+};
+
 function getCard(itemElement) {
     const card = new Card({
-        name: itemElement.name,
-        link: itemElement.link,
-        id: itemElement._id,
-        owner: itemElement.owner,
-        likes: itemElement.likes,
-        handleImageClick: () => {
-            popupWithImage.open(itemElement)
+            name: itemElement.name,
+            link: itemElement.link,
+            id: itemElement._id,
+            owner: itemElement.owner,
+            likes: itemElement.likes,
+            handleImageClick: () => {
+                popupWithImage.open(itemElement)
+            },
+            handleDeleteClick: () => {
+                popupAUSure.open(itemElement)
+            },
+            handleButtonBin: () => {
+                handleButtonBin(itemElement)
+            }
         },
-        handleDeleteClick: () => {
-            popupWithFormAUSure.open()
-        },
-
-    }, cardsTemplate);
+        cardsTemplate);
     return card.createCard()
 }
 //Adding a card from server using class -=Section=-
@@ -83,9 +98,9 @@ apiOut.getCards().then((cards) => {
     }, '.cards');
     section.renderItems()
 });
-//Filling profile form with a help of class -=UserInfo=-
-const userInfo = new UserInfo('.profile__title', '.profile__subtitle', '.profile__avatar');
 export let myId;
+//Filling profile form with a help of class -=UserInfo=-
+const userInfo = new UserInfo('.profile__title', '.profile__subtitle', '.profile__avatar', myId);
 apiOut.getProfileInfo().then((res) => {
     myId = res._id;
     userInfo.setUserInfo(res);
@@ -109,9 +124,8 @@ const popupWithFormProfile = new PopupWithForm('.overlay-profile', (userData) =>
     })
 });
 //Specify popup for each form using class -=PopupWithForm=- 
-const popupWithFormAUSure = new PopupWithForm('.overlay-ausure', () => {
-    card.handleButtonBin();
-    popupWithFormAUSure.close();
+const popupAUSure = new PopupAUSure('.overlay-ausure', (cardItem) => {
+    card.handleButtonBin(cardItem);
 });
 const popupWithFormAvatar = new PopupWithForm('.overlay-avatar', (linkAvatar) => {
     apiOut.changeAvatar(linkAvatar.avatar).then((res) => {
@@ -129,7 +143,7 @@ formChangeAvatarValidation.enableValidation();
 popupWithFormAdd.setEventListeners();
 popupWithFormProfile.setEventListeners();
 popupWithImage.setEventListeners();
-popupWithFormAUSure.setEventListeners();
+popupAUSure.setEventListeners();
 popupWithFormAvatar.setEventListeners();
 addButton.addEventListener('click', () => {
     formAddCardsValidation.deleteErrorClass();

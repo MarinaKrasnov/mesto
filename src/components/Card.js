@@ -1,17 +1,17 @@
 import {
     myId,
-    apiOut
 } from "./../pages/index.js";
 export default class Card {
     constructor(data, cardsTemplate) {
         this._name = data.name;
         this._link = data.link;
         this._template = cardsTemplate;
-        this._handleImageClick = data.handleImageClick;
         this._id = data.id;
         this._owner = data.owner._id;
         this._likes = data.likes;
+        this._handleImageClick = data.handleImageClick;
         this._handleDeleteClick = data.handleDeleteClick;
+        this._handleButtonBin = data.handleButtonBin;
         this._liked = false;
     }
     _handleButtonLike = () => {
@@ -25,7 +25,6 @@ export default class Card {
         return this._liked;
     }
     /* 
-    
     if (this._liked) {
         this._liked = true;
         this._buttonLike.classList.add('card__button-like_active')
@@ -34,13 +33,6 @@ export default class Card {
             console.log(res);
                 })
             } */
-
-    handleButtonBin = () => {
-        console.log(this._id);
-        apiOut.deleteCard(this._id).then((res) => {
-            this._cardElement.remove();
-        }).catch((err) => alert(`Server can't delete this card.Try again later. Object ${err.status}`))
-    }
     _getTemplate() {
         return this._template.cloneNode(true);
     }
@@ -67,6 +59,8 @@ export default class Card {
         this._cardImage.src = this._link;
         this._numberLikes = this._cardElement.querySelector('.card__number-likes');
         this._numberLikes.textContent = this._likes.length;
+        this._idInput = this._cardElement.querySelector('[name="id"]');
+        this._idInput.value = this._id;
         this._setEventListeners();
         return this._cardElement;
     };

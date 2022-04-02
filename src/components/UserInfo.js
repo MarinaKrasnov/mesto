@@ -17,6 +17,6 @@ export class UserInfo {
     setUserInfo(data) {
         this._name.textContent = data.name;
         this._profession.textContent = data.about;
-        this._avatar.style.backgroundImage = `url(${data.avatar}) contain center`;
+        this._avatar.style.backgroundImage = `url(${data.avatar})`;
     }
 }

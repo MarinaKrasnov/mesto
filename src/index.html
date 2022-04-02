@@ -53,6 +53,7 @@
             </button>
             <div class="card__info">
                 <h3 class="card__text">${item.name-place}</h3>
+                <input type="hidden" name="id" value="">
                 <div class="card__likes">
                     <button type="button" class="button card__button-like " aria-label="Кнопка лайк">
                     </button>
@@ -88,9 +89,12 @@
                 <input id="url" type="url" name="link" class="popup__input popup__input_type_link"
                     placeholder="Ссылка на картинку" required>
                 <span id="url-error" class="popup__error"></span>
+                <input type="hidden" name="id" value="">
                 <button type="submit" class="popup__submit popup__submit-add" aria-label="Кнопка создать">
                     Создать
                 </button>
+                <input type="hidden" name="id" value="">
+
                 <button type="button" class="button close-btn"></button>
             </fieldset>
         </form>
@@ -106,7 +110,8 @@
     <div class="overlay overlay-ausure">
         <div class="popup popup_type_ausure">
             <h2 class="popup__maintitle">Вы уверены?</h2>
-            <button type="submit" class="popup__submit" aria-label="Кнопка согласия">
+            <input type="hidden" name="id" value="">
+            <button type="submit" class="popup__submit popup__submit_size_s" aria-label="Кнопка согласия">
                 Да
             </button>
             <button type="button" class="button close-btn"></button>
@@ -116,6 +121,7 @@
         <form class="overlay__form" name="avatar-form" novalidate>
             <fieldset class="popup popup_type_avatar ">
                 <h2 class="popup__maintitle">Обновить аватар</h2>
+                <input type="hidden" name="id" value="">
                 <input id="url" type="url" name="avatar" class="popup__input popup__input_type_avatar"
                     placeholder="Ссылка на картинку" required>
                 <span id="url-error" class="popup__error"></span>

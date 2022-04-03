@@ -16,7 +16,6 @@ export class API {
             }
             throw "Ошибка запроса"
         }).then((res) => {
-            console.log(res);
             return res;
         })
     }

@@ -47,18 +47,16 @@ export const overlayImage = document.querySelector('.overlay-image__image');
 export const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__capture');
 const overlayAUSure = document.querySelector('.overlay-ausure');
 const avatar = document.querySelector('.profile__avatar');
-const idInput = overlayAUSure.querySelector('[name="id"]');
 let section;
-let card;
 // Funcions
-/* function handleButtonBin(item) {
-    console.log(item._id);
-    apiOut.deleteCard(item._id).then((res) => {
-        item.remove();
+function deleteCard(card) {
+    api.deleteCard(card._id).then(() => {
+        card.deleteCard();
         popupAUSure.close();
     }).catch((err) => alert(`Server can't delete this card.Try again later. Object ${err.status}`))
 
-}; */
+};
+
 function getCard(itemElement) {
     const card = new Card({
             name: itemElement.name,
@@ -69,35 +67,37 @@ function getCard(itemElement) {
             handleImageClick: () => {
                 popupWithImage.open(itemElement)
             },
-            handleDeleteClick: () => {
-                popupAUSure.open(itemElement)
-            },
-            handleButtonBin: (itemElement) => {
+            handleButtonBin: (card) => {
                 popupAUSure.open();
-                popupAUSure.sendHandleSubmit(() => {
-                    apiOut.deleteCard(itemElement._id)
-                        .then(() => cardElement.remove())
-                        .then(() => popupAUSure.close())
-                        .catch((err) =>
-                            alert(`Server can't delete this card.Try again later. Object ${err.status}`));
-                });
-            }
+                popupAUSure.setCard(card)
+            },
+            handleLike: (id) => {
+                api.putLike(id)
+                    .then((res) => {
+                        card.updateLikes(res.likes.length)
+                    })
+                    .catch((err) => {
+                        alert(`Error.${err} We didnt succeed to like this :)`)
+                    });
+            },
+            handleUnLike: (id) => {
+                api.deleteLike(id).then((res) => card.updateLikes(res.likes.length))
+                    .catch((err) => {
+                        alert(`Error.${err} We didnt succeed to like this :)`)
+                    })
+            },
         },
         cardsTemplate);
     const cardElement = card.createCard();
     return cardElement;
 };
-//Adding a card from server using class -=Section=-
-export const api = new API("http://localhost:3000", {
-    "Accept": "application/json",
-    "Content-Type": "application/json; charset=utf-8"
-});
-export const apiOut = new API("https://mesto.nomoreparties.co/v1/cohort-38", {
+//Adding a card from server using class -=Section=- and class -=API=-
+export const api = new API("https://mesto.nomoreparties.co/v1/cohort-38", {
     "Accept": "application/json",
     "Content-Type": "application/json; charset=utf-8",
     'authorization': 'c5a7c514-ca8f-4b82-95f7-7b25ec57dd45'
 });
-apiOut.getCards().then((cards) => {
+api.getCards().then((cards) => {
     section = new Section({
         items: cards,
         renderer: (element) => {
@@ -109,7 +109,7 @@ apiOut.getCards().then((cards) => {
 export let myId;
 //Filling profile form with a help of class -=UserInfo=-
 const userInfo = new UserInfo('.profile__title', '.profile__subtitle', '.profile__avatar', myId);
-apiOut.getProfileInfo().then((res) => {
+api.getProfileInfo().then((res) => {
     myId = res._id;
     userInfo.setUserInfo(res);
 });
@@ -119,25 +119,36 @@ const formAddCardsValidation = new FormValidator(formsValidationConfig, formAddC
 const formChangeAvatarValidation = new FormValidator(formsValidationConfig, formChangeAvatar);
 //Specify popup for each form using class -=PopupWithForm=- 
 const popupWithFormAdd = new PopupWithForm('.overlay-add', (cardData) => {
-    apiOut.postCard(cardData).then(card => {
-        section.addItem(getCard(card))
-        formAddCardsValidation.setSubmitButtonState();
-        popupWithFormAdd.close();
-    }).catch((err) => alert(`Server can't save your card now. Try again later.${err.status}`))
+    popupWithFormAdd.pleaseWait();
+    api.postCard(cardData).then(card => {
+            section.addItem(getCard(card));
+            formAddCardsValidation.setSubmitButtonState();
+        }).catch((err) => alert(`Server can't save your card now. Try again later.${err.status}`))
+        .finally(() => {
+            popupWithFormAdd.close();
+            popupWithFormAdd.stopWait('Создать')
+        })
 });
 const popupWithFormProfile = new PopupWithForm('.overlay-profile', (userData) => {
-    apiOut.editProfileInfo(userData).then((res) => {
+    popupWithFormProfile.pleaseWait();
+    api.editProfileInfo(userData).then((res) => {
         userInfo.setUserInfo(res);
+    }).finally(() => {
         popupWithFormProfile.close();
+        popupWithFormProfile.stopWait('Сохранить')
     })
 });
-//Specify popup for each form using class -=PopupWithForm=- 
-const popupAUSure = new PopupAUSure('.overlay-ausure');
-
+//Specify popup using class -=PopupAUSure=-
+const popupAUSure = new PopupAUSure('.overlay-ausure', (card) => {
+    deleteCard(card)
+});
 const popupWithFormAvatar = new PopupWithForm('.overlay-avatar', (linkAvatar) => {
-    apiOut.changeAvatar(linkAvatar.avatar).then((res) => {
+    popupAUSure.pleaseWait();
+    api.changeAvatar(linkAvatar.avatar).then((res) => {
         userInfo.setUserInfo(res);
+    }).finally(() => {
         popupWithFormAvatar.close();
+        popupWithFormProfile.stopWait('Сохранить')
     })
 })
 //Specify popup using class -=PopupWithImage=-

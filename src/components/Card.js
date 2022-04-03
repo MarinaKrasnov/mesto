@@ -36,6 +36,9 @@ export default class Card {
     _getTemplate() {
         return this._template.cloneNode(true);
     }
+    deleteCard() {
+        this._cardElement.remove();
+    }
     _setEventListeners() {
         //Creating popup for each card
         this._cardImage.addEventListener('click', this._handleImageClick);

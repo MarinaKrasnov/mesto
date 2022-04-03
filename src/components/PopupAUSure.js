@@ -1,22 +1,26 @@
 import {
-    PopupWithForm
-} from "./PopupWithForm.js";
-export class PopupAUSure extends PopupWithForm {
+    Popup
+} from "./Popup.js";
+export class PopupAUSure extends Popup {
     constructor(popupSelector, handleSubmit) {
-        super(popupSelector, handleSubmit);
+        super(popupSelector);
+        /*     this._handleSubmit = handleSubmit; */
         this._idInput = this._popup.querySelector('[name="id"]');
     }
+    sendHandleSubmit(meth) {
+        this._handleSubmit = meth;
+    };
     setEventListeners() {
-        console.log(this._idInput.value);
         super.setEventListeners();
         this._popup.addEventListener('submit', (event) => {
             event.preventDefault();
-            this._handleSubmit(this._idInput.value);
+            console.log(this._idInput.value);
+            this._handleSubmit;
         });
     }
-    open(item) {
-        super.open();
-        console.log(this._idInput.value);
-        this._idInput.value = item._id;
-    }
+    /*     open(item) {
+            super.open();
+            this._idInput.value = item._id;
+            console.log(this._idInput.value);
+        } */
 }

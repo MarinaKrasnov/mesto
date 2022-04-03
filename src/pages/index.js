@@ -47,18 +47,18 @@ export const overlayImage = document.querySelector('.overlay-image__image');
 export const overlayImageCapture = overlayImageWrapper.querySelector('.overlay-image__capture');
 const overlayAUSure = document.querySelector('.overlay-ausure');
 const avatar = document.querySelector('.profile__avatar');
+const idInput = overlayAUSure.querySelector('[name="id"]');
 let section;
 let card;
 // Funcions
-function handleButtonBin(item) {
+/* function handleButtonBin(item) {
     console.log(item._id);
     apiOut.deleteCard(item._id).then((res) => {
         item.remove();
         popupAUSure.close();
     }).catch((err) => alert(`Server can't delete this card.Try again later. Object ${err.status}`))
 
-};
-
+}; */
 function getCard(itemElement) {
     const card = new Card({
             name: itemElement.name,
@@ -72,13 +72,21 @@ function getCard(itemElement) {
             handleDeleteClick: () => {
                 popupAUSure.open(itemElement)
             },
-            handleButtonBin: () => {
-                handleButtonBin(itemElement)
+            handleButtonBin: (itemElement) => {
+                popupAUSure.open();
+                popupAUSure.sendHandleSubmit(() => {
+                    apiOut.deleteCard(itemElement._id)
+                        .then(() => cardElement.remove())
+                        .then(() => popupAUSure.close())
+                        .catch((err) =>
+                            alert(`Server can't delete this card.Try again later. Object ${err.status}`));
+                });
             }
         },
         cardsTemplate);
-    return card.createCard()
-}
+    const cardElement = card.createCard();
+    return cardElement;
+};
 //Adding a card from server using class -=Section=-
 export const api = new API("http://localhost:3000", {
     "Accept": "application/json",
@@ -124,9 +132,8 @@ const popupWithFormProfile = new PopupWithForm('.overlay-profile', (userData) =>
     })
 });
 //Specify popup for each form using class -=PopupWithForm=- 
-const popupAUSure = new PopupAUSure('.overlay-ausure', (cardItem) => {
-    card.handleButtonBin(cardItem);
-});
+const popupAUSure = new PopupAUSure('.overlay-ausure');
+
 const popupWithFormAvatar = new PopupWithForm('.overlay-avatar', (linkAvatar) => {
     apiOut.changeAvatar(linkAvatar.avatar).then((res) => {
         userInfo.setUserInfo(res);

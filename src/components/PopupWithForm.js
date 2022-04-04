@@ -26,4 +26,10 @@ export class PopupWithForm extends Popup {
         super.close();
         this._form.reset();
     }
+    pleaseWait() {
+        this._btn.textContent = 'Сохранение...';
+    }
+    stopWait(text) {
+        this._btn.textContent = text;
+    }
 }

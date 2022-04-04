@@ -4,9 +4,7 @@ export class FormValidator {
         this._form = form;
         this._inputs = [...this._form.querySelectorAll(data.inputSelector)];
     }
-
     _addFormListeners() {
-        // this._form.addEventListener('submit', this._handleSubmit)
         this._form.addEventListener('input', () => this.setSubmitButtonState())
         this._inputs.forEach(input => input.addEventListener('input', () => {
             if (!input.validity.valid) {

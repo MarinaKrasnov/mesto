@@ -1,6 +1,3 @@
-import {
-    api
-} from './../pages/index.js'
 export default class Section {
     constructor({
         items,

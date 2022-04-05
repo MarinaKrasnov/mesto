@@ -18,5 +18,6 @@ export class UserInfo {
         this._name.textContent = data.name;
         this._profession.textContent = data.about;
         this._avatar.style.backgroundImage = `url(${data.avatar})`;
+        this._id = data._id;
     }
 }

@@ -26,10 +26,12 @@ export class PopupWithForm extends Popup {
         super.close();
         this._form.reset();
     }
-    pleaseWait() {
-        this._btn.textContent = 'Сохранение...';
+    renderLoading(isLoading, text) {
+        isLoading ? this._btn.textContent = 'Сохранение...' : this._btn.textContent = text;
     }
-    stopWait(text) {
-        this._btn.textContent = text;
+    setInputValues(data) {
+        this._inputList.forEach((input) => {
+            input.value = data[input.name];
+        });
     }
 }

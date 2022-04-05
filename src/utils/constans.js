@@ -10,17 +10,9 @@ export const popupImageConfig = {
     overlayImageCapture: '.overlay-image__capture',
     overlayImage: '.overlay-image__image'
 }
-export const popupInputsConfig = {
-    popupTitle: document.querySelector('.popup__input_value_name'),
-    popupSubtitle: document.querySelector('.popup__input_value_profession')
-}
 //Buttons
 export const editIcon = document.querySelector('.profile__icon');
 export const addButton = document.querySelector('.profile__add-button');
 export const avatar = document.querySelector('.profile__avatar');
 //Card Template
 export const cardsTemplate = document.querySelector('#card-template').content.querySelector('.card');
-//Forms
-export const formProfile = document.querySelector('[name="form-profile"]');
-export const formAddCards = document.querySelector('[name="new-place"]');
-export const formChangeAvatar = document.querySelector('[name="avatar-form"]');

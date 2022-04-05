@@ -14,9 +14,7 @@ export class API {
             if (res.ok) {
                 return res.json()
             }
-            throw "Ошибка запроса"
-        }).then((res) => {
-            return res;
+            throw "Request failed"
         })
     }
     postCard(item) {

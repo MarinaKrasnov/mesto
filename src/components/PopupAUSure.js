@@ -18,10 +18,10 @@ export class PopupAUSure extends Popup {
         this.card = card
         this._idInput.value = card.id
     }
-    pleaseWait() {
+    renderLoading() {
         this._btn.textContent = 'Сохранение...';
     }
-    stopWait(text) {
+    renderLoadingOut(text) {
         this._btn.textContent = text;
     }
 }

@@ -108,31 +108,38 @@ const popupWithFormAdd = new PopupWithForm('.overlay-add', (cardData) => {
         })
         .then(() => {
             popupWithFormAdd.close();
-            popupWithFormAdd.renderLoading(false, 'Создать')
         })
         .catch((err) => alert(`Server can't save your card now. Try again later.${err.status}`))
+        .finally(() => {
+            popupWithFormAdd.renderLoading(false, 'Создать')
+        })
 });
 const popupWithFormProfile = new PopupWithForm('.overlay-profile', (userData) => {
     popupWithFormProfile.renderLoading(true);
     api.editProfileInfo(userData).then((res) => {
-        userInfo.setUserInfo(res);
-    }).then(() => {
-        popupWithFormProfile.close();
-        popupWithFormProfile.renderLoading(false, 'Сохранить')
-    }).catch((err) => alert(`Server can't save your profile data now. Try again later.${err.status}`))
+            userInfo.setUserInfo(res);
+        }).then(() => {
+            popupWithFormProfile.close()
+        }).catch((err) =>
+            alert(`Server can't save your profile data now. Try again later.${err.status}`))
+        .finally(() => {
+            popupWithFormProfile.renderLoading(false, 'Сохранить')
+        })
 });
 //Specify popup using class -=PopupAUSure=-
 const popupAUSure = new PopupAUSure('.overlay-ausure', (card) => {
     deleteCard(card)
 });
 const popupWithFormAvatar = new PopupWithForm('.overlay-avatar', (linkAvatar) => {
-    popupAUSure.renderLoading(true);
+    popupWithFormAvatar.renderLoading(true);
     api.changeAvatar(linkAvatar.avatar).then((res) => {
             userInfo.setUserInfo(res);
         }).catch((err) => alert(`Server can't change your profile image now. Try again later.${err.status}`))
         .then(() => {
             popupWithFormAvatar.close();
-            popupWithFormProfile.renderLoading(false, 'Сохранить')
+        })
+        .finally(() => {
+            popupWithFormAvatar.renderLoading(false, 'Сохранить')
         })
 });
 //Specify popup using class -=PopupWithImage=-
